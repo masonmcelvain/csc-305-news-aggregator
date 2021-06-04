@@ -1,0 +1,9 @@
+site_name: Mason's News Aggregator
+
+theme:
+  name: mkdocs
+
+nav:
+  - Visitor Pattern: visitor.md
+  - Composite Pattern: composite.md
+  - Decorator Pattern: decorator.md
