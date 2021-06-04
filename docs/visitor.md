@@ -1,11 +1,11 @@
 # <i class="fas fa-globe-americas" style="color:#FA023C"></i> Visitor Pattern
 
 To allow for configuration, the News Aggregator program accepts a configuration
-file that must follow a specific format. The config file is parsed by an ANTLR
-module that produces a parse tree containing the data found in the config file.
-The problem that this instance of the visitor pattern seeks to address is how to
-collect the relevant data, and only the relevant data, from the parse tree for
-use by the News Aggregator program.
+file that must follow a specific format. The config file is parsed by an
+[ANTLR](https://www.antlr.org/) module that produces a parse tree containing the
+data found in the config file. The problem that this instance of the visitor
+pattern seeks to address is how to collect the relevant data, and only the
+relevant data, from the parse tree for use by the News Aggregator program.
 
 ## Pattern Used & SOLID Principle Addressed
 The Visitor Pattern is a way in which to add functionality to a target class (or
