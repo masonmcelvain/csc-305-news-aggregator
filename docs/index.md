@@ -6,6 +6,6 @@ this is an analysis of three instances where I used design patterns inpsired by
 [SOLID](https://en.wikipedia.org/wiki/SOLID) design principles.
 
 ## Design Patterns Analyzed
-* ##### [Visitor Pattern](visitor.md)
-* ##### [Composite Pattern](composite.md)
-* ##### [Decorator Pattern](decorator.md)
+* ### <i class="fas fa-globe-americas" style="color:#FA023C"></i> [**Visitor Pattern**](visitor.md)
+* ### <i class="fas fa-puzzle-piece" style="color:#FA023C"></i> [**Composite Pattern**](composite.md)
+* ### <i class="fas fa-hat-wizard" style="color:#FA023C"></i> [**Decorator Pattern**](decorator.md)

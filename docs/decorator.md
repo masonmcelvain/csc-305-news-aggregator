@@ -1,4 +1,4 @@
-# Decorator Pattern
+# <i class="fas fa-hat-wizard" style="color:#FA023C"></i> Decorator Pattern
 Clearly articulate the problem addressed by the design instance.
 
 ...

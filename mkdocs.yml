@@ -1,7 +1,12 @@
 site_name: Mason's News Aggregator
+site_url: http://127.0.0.1:8000/
+site_author: Mason McElvain
+site_description: ''
+repo_url: ''
 
 theme:
-  name: mkdocs
+  name: null
+  custom_dir: 'cinder'
 
 nav:
   - Visitor Pattern: visitor.md

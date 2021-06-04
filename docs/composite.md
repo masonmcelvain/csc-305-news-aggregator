@@ -1,4 +1,4 @@
-# Composite Pattern
+# <i class="fas fa-puzzle-piece" style="color:#FA023C"></i> Composite Pattern
 Clearly articulate the problem addressed by the design instance.
 
 ...

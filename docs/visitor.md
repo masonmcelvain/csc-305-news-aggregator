@@ -1,4 +1,4 @@
-# Visitor Pattern
+# <i class="fas fa-globe-americas" style="color:#FA023C"></i> Visitor Pattern
 Clearly articulate the problem addressed by the design instance.
 
 To allow for configuration, the News Aggregator program accepts a configuration
