@@ -1,5 +1,4 @@
 # <i class="fas fa-globe-americas" style="color:#FA023C"></i> Visitor Pattern
-
 To allow for configuration, the News Aggregator program accepts a configuration
 file that must follow a specific format. The config file is parsed by an
 [ANTLR](https://www.antlr.org/) module that produces a parse tree containing the
@@ -31,9 +30,9 @@ public <T> T accept(Visitor<T> visitor) {
 ## Implementation of Design
 The News Aggregator uses a visitor to generate article processors given the
 ANTLR parse tree of a config file to visit, known by ANTLR as a 'Source
-Context'. So, when the client accepts a `AggregatorAllProcessorsVisitor` (yikes,
-naming is hard) on a parse tree, they will get back a list of processors, one
-for each data source listed in the config file.
+Context'. So, when the client accepts a `AggregatorAllProcessorsVisitor` on a
+parse tree, they will get back a list of processors, one for each data source
+listed in the config file.
 ```java
 List<Processor> processors = parseTree.accept(aggregatorAllProcessorsVisitor);
 ```
@@ -81,7 +80,56 @@ around the actual source of the JSON data to be used by the Parser (e.g. data
 from a file or a network connection).
 
 ## Benefits of This Design in Context
-*Clearly articulate the benefits of the Design Pattern or SOLID principle for this design instance in the context of your code.*
+The use of visitors to aggregate Processors from a parse tree makes the code
+easier to reason about and more flexible to change.
+
+Each visitor has a single responsibility and only interacts with the data in the
+parse tree that pertains to that responsibility. This makes it easier to talk
+about which visitor is performing which action. For example, a visitor that
+builds a `Processor` might use other visitors to produce a Parser and DataSource
+to construct the `Processor`. Those in turn might use other 'low level' visitors
+to construct their objects from the data found in the parse tree. In addition,
+these 'low level' visitors that get data directly with the parse tree can be
+shared by more than one 'high level' visitor (e.g. the visitor that produces a
+Parser) for different purposes, which reduces code duplication.
+
+Using visitors also makes it easier to modify the format of the configuration
+file in the future, as you would only need to modify an existing visitor or add
+a new one to account for the changes in the parse tree.
 
 ## Comparison Against Alternative Designs
-*Discuss alternative design options and compare the advantages/disadvantages with your design. This may include a comparison to a traditional technique, to a naive approach, to an approach you initially used, or to an approach that, on reflection, you wish you had used.*
+An alternative approach to using visitors to build a `Processor` from a parse
+tree might be creating a single class that does this job. We'll call this
+hypothetical class a `ProcessorProducer`. The `ProcessorProducer` might accept a
+parse tree, perform a search through the parse tree to produce a `Processor`,
+and return that `Processor` to the caller.
+
+An approach like this has some advantages. For one, it's simple. It would be
+easier for new developers being onboarded to this project to initially
+understand the utility of a `ProcessorProducer`. A parse tree goes in, a
+`Processor` comes out. The spatial location of code being called is a
+readability consideration too. A composition of visitors defined in different
+files calling into each other is less explicit, whereas a single class like the
+`ProcessorProducer` that performs all its operations in one place could be
+easier to read at a glance.
+
+However, using a single class to produce a Processor lacks the maintainability
+benefits that the Visitor Pattern provides. If the format of the configuration
+file changes, for example, it's not immediately obvious what part of the
+`ProcessorProducer` needs to change. It depends how it's implemented. A small
+change to the configuration file might really complicate the `ProcessorProducer`
+or require a total rewrite.
+
+It could also be harder to reason about how the `ProcessorProducer` generates a
+Processor. The only entities that you could point to and describe might be
+methods on the `ProcessorProducer` itself.
+
+Consider also that there may be other Producers that create different classes
+based on the parse tree. Those other Producers will likely perform many of the
+same operations that the `ProcessorProducer` does, but they can't share the code
+that performs those operations. Maybe they could both extend a common base
+class, but it might be hard to abstract methods for use in the the different
+contexts of the Producers. It would also be problematic if the other Producers
+needed to extend a different class for operations specific to the class they
+produce. Single inheritance would force such Producers to duplicate the shared
+operations that they could otherwise inherit.
