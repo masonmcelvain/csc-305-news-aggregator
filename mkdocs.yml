@@ -2,7 +2,6 @@ site_name: Mason's News Aggregator
 site_url: https://sleepy-tereshkova-ede477.netlify.app/
 site_author: Mason McElvain
 site_description: 'CSC 305 Final Analysis'
-repo_url: 'https://github.com/masonmcelvain/csc-305-news-aggregator'
 
 theme:
   name: null
